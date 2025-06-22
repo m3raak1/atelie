@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation("io.github.jan-tennert.supabase:supabase-kt:1.3.2")
+    implementation("io.github.jan-tennert.supabase:postgrest-kt:1.3.2")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

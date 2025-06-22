@@ -5,4 +5,5 @@
     <color name="border">#E2E8F0</color>
     <color name="dark_gray">#6b7280</color>
     <color name="primary">#0f766e</color>
+    <color name="primary_light">#0d9488</color>
 </resources>

@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        loadFragment(HomeFragment())
+        loadFragment(NewClientFragment())
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
