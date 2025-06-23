@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("plugin.serialization") version "1.9.22"
 }
 
 android {
@@ -36,8 +37,26 @@ android {
 }
 
 dependencies {
-    implementation("io.github.jan-tennert.supabase:supabase-kt:1.3.2")
-    implementation("io.github.jan-tennert.supabase:postgrest-kt:1.3.2")
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.2.0-ksp-b1"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.github.jan-tennert.supabase:auth-kt")
+    implementation("io.github.jan-tennert.supabase:realtime-kt")
+
+    // Ktor Core
+    implementation("io.ktor:ktor-client-core:3.1.1")
+
+// Engine OkHttp (para Android)
+    implementation("io.ktor:ktor-client-okhttp:3.1.1")
+
+// Content Negotiation (pra JSON)
+    implementation("io.ktor:ktor-client-content-negotiation:3.1.1")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.1.1")
+
+// HttpTimeout (a que está faltando no seu erro)
+    implementation("io.ktor:ktor-client-plugins:3.1.1")
+
+
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
