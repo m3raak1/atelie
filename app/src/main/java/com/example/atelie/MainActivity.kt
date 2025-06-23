@@ -55,14 +55,15 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        loadFragment(ClientsFragment())
+        loadFragment(NewOrderFragment())
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> loadFragment(HomeFragment())
-                R.id.nav_orders -> loadFragment(OrdersFragment())
+                R.id.nav_orders -> loadFragment(NewOrderFragment())
+                R.id.nav_costumers -> loadFragment(ClientsFragment())
             }
             true
         }

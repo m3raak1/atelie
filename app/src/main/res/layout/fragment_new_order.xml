@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:paddingBottom="5dp"
-                    android:text="Nome"
+                    android:text="Cliente"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
                 <com.google.android.material.textfield.TextInputLayout
@@ -83,21 +83,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHighlight="@color/primary"
-                        android:hint="Nome Completo"/>
+                        android:paddingVertical="15dp"
+                        android:hint="Selecione um cliente"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
-                    android:id="@+id/phone_label"
-                    app:layout_constraintTop_toBottomOf="@id/input_layout_name"
+                    android:id="@+id/position_label"
+                    app:layout_constraintTop_toBottomOf="@id/input_layout_client"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:paddingBottom="5dp"
-                    android:text="Telefone"
+                    android:text="Posição (1 - 140)"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_layout_phone"
-                    app:layout_constraintTop_toBottomOf="@id/name_label"
+                    android:id="@+id/input_layout_position"
+                    app:layout_constraintTop_toBottomOf="@id/position_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:boxCornerRadiusBottomEnd="10dp"
@@ -114,41 +116,196 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHighlight="@color/primary"
-                        android:hint="(00) 00000-000"
-                        android:inputType="phone"/>
+                        android:hint="Numero"
+                        android:inputType="numberSigned"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <LinearLayout
-                    app:layout_constraintTop_toBottomOf="@id/phone_label"
+                <TextView
+                    android:id="@+id/data_entry_label"
+                    app:layout_constraintTop_toBottomOf="@id/input_layout_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Data de Entrega"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout_data_entry"
+                    app:layout_constraintTop_toBottomOf="@id/data_entry_label"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/input_layout_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:hintAnimationEnabled="false"
+                    app:boxStrokeColor="@color/input_stroke_color"
+                    app:boxBackgroundMode="outline"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_data_entry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHighlight="@color/primary"
+                        android:hint="dd/mm/aaaa"
+                        android:inputType="date"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/time_label"
+                    app:layout_constraintTop_toTopOf="@id/data_entry_label"
+                    app:layout_constraintStart_toStartOf="@id/input_layout_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Periodo"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout_time"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    app:layout_constraintTop_toBottomOf="@id/time_label"
+                    app:layout_constraintStart_toEndOf="@id/input_layout_data_entry"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:hintAnimationEnabled="false"
+                    app:boxStrokeColor="@color/input_stroke_color"
+                    app:boxBackgroundMode="outline"
+                    app:hintEnabled="false">
+
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:hint="Manha"
+                        app:simpleItems="@array/time_items"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <CheckBox
+                    android:id="@+id/payment"
+                    app:layout_constraintTop_toBottomOf="@id/input_layout_data_entry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Cancelar"
-                        android:textStyle="bold"
-                        android:backgroundTint="@android:color/transparent"
-                        android:textColor="@color/black"
-                        app:strokeColor="@color/border"
-                        app:strokeWidth="1dp"
-                        app:cornerRadius="10dp"/>
-                    <Space
-                        android:layout_width="10dp"
-                        android:layout_height="match_parent" />
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/save_client"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Salvar Cliente"
-                        android:textStyle="bold"
-                        android:backgroundTint="@color/primary_light"
-                        app:cornerRadius="10dp"/>
+                    android:text="Pagamento Efetuado"/>
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/add_item_clothe"
+                    app:layout_constraintTop_toBottomOf="@id/payment"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:cornerRadius="10dp"
+                    android:backgroundTint="@android:color/transparent"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border"
+                    android:text="Adicionar Peça"
+                    android:textColor="@color/black"
+                    app:icon="@drawable/ic_plus_draw"
+                    app:iconTint="@color/black"/>
+
+                <TextView
+                    app:layout_constraintTop_toTopOf="@id/add_item_clothe"
+                    app:layout_constraintBottom_toBottomOf="@id/add_item_clothe"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Peças"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:id="@+id/items_clothe_card"
+                    app:layout_constraintTop_toBottomOf="@id/add_item_clothe"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        app:strokeColor="@color/border"
+                        app:cardCornerRadius="10dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center_horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nenhuma peça adicionada"
+                                android:layout_marginVertical="20dp"
+                                android:textColor="@color/dark_gray"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
+
+
+
+                <TextView
+                    android:id="@+id/observation_label"
+                    app:layout_constraintTop_toBottomOf="@id/items_clothe_card"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Observações (Opicional)"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout_observation"
+                    app:layout_constraintTop_toBottomOf="@id/observation_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:hintAnimationEnabled="false"
+                    app:boxStrokeColor="@color/input_stroke_color"
+                    app:boxBackgroundMode="outline"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_observation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHighlight="@color/primary"
+                        android:paddingVertical="15dp"
+                        android:hint="Observações adicionaris osbre este pedido"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/save_client"
+                    app:layout_constraintTop_toBottomOf="@id/input_layout_observation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:text="Salvar Cliente"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/primary_light"
+                    app:cornerRadius="10dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
