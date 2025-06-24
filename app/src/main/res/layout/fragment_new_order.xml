@@ -237,6 +237,7 @@
                     android:orientation="vertical"
                     android:gravity="center_horizontal">
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/placeholder_item_clothe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import android.widget.Button
-import android.util.Patterns
 
 class NewClientFragment : Fragment() {
 
