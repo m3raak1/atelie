@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".NewOrderFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@color/bg_color"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -76,14 +76,16 @@
                     app:hintAnimationEnabled="false"
                     app:boxStrokeColor="@color/input_stroke_color"
                     app:boxBackgroundMode="outline"
-                    app:hintEnabled="false">
+                    app:hintEnabled="false"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_arrow_tiny">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/input_name"
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/input_client"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHighlight="@color/primary"
-                        android:paddingVertical="15dp"
+                        android:padding="15dp"
                         android:hint="Selecione um cliente"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
@@ -112,7 +114,7 @@
                     app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/input_phone"
+                        android:id="@+id/input_position"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHighlight="@color/primary"
@@ -154,6 +156,8 @@
                         android:layout_height="wrap_content"
                         android:textColorHighlight="@color/primary"
                         android:hint="dd/mm/aaaa"
+                        android:focusable="false"
+                        android:clickable="true"
                         android:inputType="date"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -187,6 +191,7 @@
                     app:hintEnabled="false">
 
                     <AutoCompleteTextView
+                        android:id="@+id/input_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="none"
@@ -215,6 +220,7 @@
                     android:text="Adicionar Peça"
                     android:textColor="@color/black"
                     app:icon="@drawable/ic_plus_draw"
+                    app:iconSize="0dp"
                     app:iconTint="@color/black"/>
 
                 <TextView
@@ -226,39 +232,42 @@
                     android:text="Peças"
                     android:textStyle="bold"/>
 
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/items_clothe_card"
                     app:layout_constraintTop_toBottomOf="@id/add_item_clothe"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/placeholder_item_clothe"
+                    android:backgroundTint="@color/bg_color"
+                    app:strokeColor="@color/border"
+                    app:cardCornerRadius="10dp">
+                    <LinearLayout
+                        android:id="@+id/item_clothe_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        app:strokeColor="@color/border"
-                        app:cardCornerRadius="10dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
+                        <TextView
+                            android:id="@+id/item_clothe_placeholder"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center_horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Nenhuma peça adicionada"
-                                android:layout_marginVertical="20dp"
-                                android:textColor="@color/dark_gray"/>
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
+                            android:text="Nenhuma peça adicionada"
+                            android:layout_marginVertical="20dp"
+                            android:textColor="@color/dark_gray"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/total_price"
+                    app:layout_constraintTop_toBottomOf="@id/items_clothe_card"
+                    app:layout_constraintEnd_toEndOf="@id/items_clothe_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total: "
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/observation_label"
@@ -296,17 +305,18 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/save_client"
-                    app:layout_constraintTop_toBottomOf="@id/input_layout_observation"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
                     android:layout_weight="1"
-                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/primary_light"
                     android:text="Salvar Cliente"
                     android:textStyle="bold"
-                    android:backgroundTint="@color/primary_light"
-                    app:cornerRadius="10dp"/>
+                    app:cornerRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/input_layout_observation" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

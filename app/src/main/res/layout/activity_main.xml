@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:background="@color/white">
+    android:background="@color/bg_color">
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:menu="@menu/bottom_navigation_menu"
-            app:backgroundTint="@color/white"
+            app:backgroundTint="@android:color/transparent"
             app:itemIconTint="@color/bottom_nav_item_color"
             app:itemTextColor="@color/bottom_nav_item_color"
             app:labelVisibilityMode="selected"

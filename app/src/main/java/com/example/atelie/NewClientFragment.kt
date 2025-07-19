@@ -1,6 +1,7 @@
 package com.example.atelie
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,10 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import android.widget.Button
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import io.github.jan.supabase.postgrest.from
+import kotlinx.coroutines.launch
 
 class NewClientFragment : Fragment() {
 
@@ -18,15 +23,18 @@ class NewClientFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_new_client, container, false)
     }
 
+    private lateinit var inputName: TextInputEditText
+    private lateinit var inputPhone: TextInputEditText
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Referências aos componentes
         val inputLayoutName = view.findViewById<TextInputLayout>(R.id.input_layout_name)
-        val inputName = view.findViewById<TextInputEditText>(R.id.input_name)
+        inputName = view.findViewById<TextInputEditText>(R.id.input_name)
 
         val inputLayoutPhone = view.findViewById<TextInputLayout>(R.id.input_layout_phone)
-        val inputPhone = view.findViewById<TextInputEditText>(R.id.input_phone)
+        inputPhone = view.findViewById<TextInputEditText>(R.id.input_phone)
 
         val btnSave = view.findViewById<Button>(R.id.save_client)
 
@@ -55,7 +63,9 @@ class NewClientFragment : Fragment() {
             }
 
             if (isValid) {
-                // Aqui você pode continuar com o salvamento ou enviar os dados
+                sendClient(inputsToClient()) {
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                }
             }
         }
     }
@@ -65,5 +75,24 @@ class NewClientFragment : Fragment() {
         // Exemplo: Aceita formatos como (11) 91234-5678 ou 11912345678
         val regex = Regex("^\\(?\\d{2}\\)?\\s?\\d{4,5}-?\\d{4}\$")
         return regex.matches(phone)
+    }
+
+    private fun inputsToClient(): ClientToDb {
+        return ClientToDb(inputName.text.toString().lowercase(), inputPhone.text.toString())
+    }
+
+    private fun sendClient(client: ClientToDb, onSuccess: () -> Unit) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                supabase
+                    .from("clients")
+                    .insert(client)
+
+                Toast.makeText(requireContext(), "Cliente adicionado com sucesso", Toast.LENGTH_SHORT).show()
+                onSuccess()
+            } catch (e: Exception) {
+                Log.e("Supabase", "Falha ao enviar cliente", e)
+            }
+        }
     }
 }

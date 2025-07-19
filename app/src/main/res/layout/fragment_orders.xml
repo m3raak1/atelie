@@ -3,12 +3,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrdersFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ClientsFragment"
+    android:background="@color/bg_color">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Orders" />
+        android:paddingTop="20dp">
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"
+            android:text="Entradas"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="60dp" />
+        <TextView
+            android:id="@+id/subtitle"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gerenciar suas entradas"
+            android:textColor="@color/dark_gray"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_search_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/input_stroke_color"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subtitle"
+            app:startIconDrawable="@drawable/ic_search_draw"
+            app:startIconTint="@color/dark_gray">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Buscar entradas..."
+                android:textColorHighlight="@color/primary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ScrollView
+            app:layout_constraintTop_toBottomOf="@id/input_search_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:cardCornerRadius="10dp"
+                app:strokeColor="@color/border"
+                app:strokeWidth="1dp"
+                android:backgroundTint="@color/white"
+                android:elevation="0dp">
+                <LinearLayout
+                    android:id="@+id/order_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </ScrollView>
+        <ImageButton
+            android:id="@+id/add_order"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_plus"
+            android:background="@drawable/add_btn"
+            android:scaleType="centerInside"
+            android:elevation="5dp"
+            android:tint="@color/white"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

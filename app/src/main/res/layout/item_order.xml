@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
+    android:background="@color/bg_color">
+    <TextView
+        android:id="@+id/name_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Jane Smith"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+    
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/order_exit_status"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:backgroundTint="#FFEBCF"
+        app:strokeColor="#FFEBCF">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Não saiu"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="5dp"
+            android:textColor="#B96C0E"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/order_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_client"
+        app:layout_constraintBottom_toTopOf="@id/order_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Posição 3 · 2 Peças"/>
+
+    <TextView
+        android:id="@+id/order_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/order_info"
+        app:layout_constraintStart_toStartOf="@id/name_client"
+        android:text="R$ 350,00"/>
+    
+    <TextView
+        android:id="@+id/order_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entrega: 01/01/0101"/>
+
+<!--    <ImageView-->
+<!--        android:visibility="gone"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/ic_short_arrow"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:rotation="-90"/>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

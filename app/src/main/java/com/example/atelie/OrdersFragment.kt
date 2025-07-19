@@ -1,59 +1,117 @@
 package com.example.atelie
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.query.Columns
+import kotlinx.coroutines.launch
+import kotlinx.datetime.format
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.Serializable
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [OrdersFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class OrdersFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_orders, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment OrdersFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            OrdersFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val addOrderBtn = view.findViewById<ImageButton>(R.id.add_order)
+
+        addOrderBtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, NewOrderFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        initializeOrderList(view) { erro ->
+            Toast.makeText(requireContext(), "Erro ao carregar entradas", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun initializeOrderList(view: View, onError: ((Throwable) -> Unit)? = null) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val columns = Columns.raw("""
+                    *,
+                    clients(*),
+                    items_clothing(count)
+                """.trimIndent())
+
+                val ordersWithClients = supabase
+                    .from("orders")
+                    .select(columns = columns)
+                    .decodeList<OrderWithClientAndItemClothingCount>()
+
+                val container = view.findViewById<LinearLayout>(R.id.order_list)
+
+                for ((index, order) in ordersWithClients.withIndex()) {
+                    addOrderCard(view, order)
+
+                    if (index < ordersWithClients.lastIndex) {
+                        val divider = layoutInflater.inflate(R.layout.view_divider, container, false)
+                        container.addView(divider)
+                    }
                 }
+
+                Log.d("Supabase", ordersWithClients.toString())
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.d("Supabase", "Erro ao carregar entradas")
+                onError?.invoke(e)
             }
+        }
+    }
+
+    fun addOrderCard(view: View, orderWithClient: OrderWithClientAndItemClothingCount) {
+        val container = view.findViewById<LinearLayout>(R.id.order_list)
+
+        val newOrderCard = layoutInflater.inflate(R.layout.item_order, container, false)
+
+        newOrderCard.findViewById<TextView>(R.id.name_client).text = buildString {
+            append(orderWithClient.clients.name)
+            append(" · ")
+            append(orderWithClient.clients.phone)
+        }
+
+        newOrderCard.findViewById<TextView>(R.id.order_info).text = buildString {
+            append("Posição ")
+            append(orderWithClient.position)
+            append(" · ")
+            append(orderWithClient.items_clothing.firstOrNull()?.count ?: 0)
+            append(" Peça")
+        }
+
+        newOrderCard.findViewById<TextView>(R.id.order_price).text = buildString {
+            append("R$ ")
+            append(orderWithClient.price)
+        }
+
+        newOrderCard.findViewById<TextView>(R.id.order_date).text = buildString {
+            append("Entrega: ")
+            append(orderWithClient.date_exit.dayOfMonth)
+            append("/")
+            append("%02d".format(orderWithClient.date_exit.monthNumber))
+            append("/")
+            append(orderWithClient.date_exit.year)
+        }
+
+        container.addView(newOrderCard)
     }
 }

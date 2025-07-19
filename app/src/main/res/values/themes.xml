@@ -3,8 +3,7 @@
     <style name="Base.Theme.Ateliê" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:textColorHighlight">@color/primary</item>
-        <item name="colorSurface">@color/primary</item>
+        <item name="colorSurface">@color/white</item>
     </style>
 
     <style name="navbar" parent="CardView">
@@ -16,4 +15,9 @@
     </style>
 
     <style name="Theme.Ateliê" parent="Base.Theme.Ateliê" />
+
+    <style name="ThemeOverlay.Ateliê.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
 </resources>

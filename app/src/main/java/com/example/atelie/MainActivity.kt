@@ -35,16 +35,6 @@ val supabase = createSupabaseClient(
     //install other modules
 }
 
-@OptIn(InternalSerializationApi::class)
-@Serializable
-data class Client(
-    val id: Int,
-    val name: String,
-    val phone: String,
-    @Serializable(with = OffsetDateTimeSerializer::class)
-    val created_at: OffsetDateTime
-)
-
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> loadFragment(HomeFragment())
-                R.id.nav_orders -> loadFragment(NewOrderFragment())
+                R.id.nav_orders -> loadFragment(OrdersFragment())
                 R.id.nav_costumers -> loadFragment(ClientsFragment())
             }
             true
@@ -70,19 +60,6 @@ class MainActivity : AppCompatActivity() {
 
         supabase.handleDeeplinks(intent)
 
-
-//        lifecycleScope.launch {
-//            try {
-//                supabase.auth.signInWith(Email) {
-//                    email = "anthony.passos@gmail.com"
-//                    password = "123456789"
-//                }
-//
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//                Log.d("supabase-login", "F")
-//            }
-//        }
 //
 //        @OptIn(InternalSerializationApi::class)
 //        lifecycleScope.launch {
