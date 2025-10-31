@@ -20,6 +20,7 @@
             android:textStyle="bold"/>
 
         <ImageButton
+            android:id="@+id/delete_btn"
             app:layout_constraintTop_toTopOf="@id/item_clothe"
             app:layout_constraintBottom_toBottomOf="@id/item_clothe"
             app:layout_constraintEnd_toEndOf="parent"
@@ -193,7 +194,7 @@
                     android:textColorHighlight="@color/primary"
                     android:paddingVertical="15dp"
                     android:hint="250 R$"
-                    android:inputType="number"/>
+                    android:inputType="numberDecimal"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

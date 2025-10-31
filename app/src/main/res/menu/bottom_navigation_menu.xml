@@ -9,7 +9,7 @@
         android:id="@+id/nav_orders"
         android:enabled="true"
         android:icon="@drawable/ic_orders"
-        android:title="Pedidos"/>
+        android:title="Entradas"/>
     <item
         android:id="@+id/nav_costumers"
         android:enabled="true"

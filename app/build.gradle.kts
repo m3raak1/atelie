@@ -37,6 +37,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
 }
 
 dependencies {
@@ -69,4 +72,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
 }

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isNotEmpty
@@ -70,8 +71,12 @@ class FullScreenDialog : DialogFragment() {
     var clotheTypeName: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val addButton = view.findViewById<MaterialButton>(R.id.add_item_clothe_btn)
+        val deleteBtn = view.findViewById<ImageButton>(R.id.delete_btn)
+        deleteBtn.setOnClickListener {
+            delete()
+        }
 
+        val addButton = view.findViewById<MaterialButton>(R.id.add_item_clothe_btn)
         addButton.setOnClickListener {
             enviarResultado(view)
         }
@@ -276,7 +281,6 @@ class FullScreenDialog : DialogFragment() {
         onResult = listener
     }
 
-    // quando quiser retornar algo, tipo ao clicar em "Salvar"
     private fun enviarResultado(view: View) {
         if (!validateItem(view)) return
 
@@ -298,6 +302,16 @@ class FullScreenDialog : DialogFragment() {
             quantity = quantity
         ) // monta o objeto com os dados que quer devolver
         onResult?.invoke(resultado)
+        dismiss()
+    }
+
+    private var onDelete: (() -> Unit)? = null
+    fun setOnDeleteListener(listener: () -> Unit) {
+        onDelete = listener
+    }
+
+    private fun delete() {
+        onDelete?.invoke()
         dismiss()
     }
 }

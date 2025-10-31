@@ -24,7 +24,6 @@ import okio.Inflater
 import java.time.OffsetDateTime
 
 class ClotheItemsController {
-
     @Serializable
     @OptIn(InternalSerializationApi::class)
     data class ClothesType(

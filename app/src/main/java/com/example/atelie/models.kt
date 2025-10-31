@@ -30,6 +30,24 @@ data class ClientToDb(
 
 @OptIn(InternalSerializationApi::class)
 @Serializable
+data class ClothingType(
+    val id: Int,
+    val name: String,
+    @Serializable(with = OffsetDateTimeSerializer::class)
+    val created_at: OffsetDateTime
+)
+
+@OptIn(InternalSerializationApi::class)
+@Serializable
+data class Service(
+    val id: Int,
+    val name: String,
+    @Serializable(with = OffsetDateTimeSerializer::class)
+    val created_at: OffsetDateTime
+)
+
+@OptIn(InternalSerializationApi::class)
+@Serializable
 data class ItemClothingToDb(
     val id_order: Int,
     val id_clothing_type: Int,
@@ -44,6 +62,20 @@ data class ItemClothing(
     val id: Int? = null,
     val id_order: Int,
     val id_clothing_type: Int,
+    val id_client: Int,
+    val desc: String,
+    val price: Float,
+    @Serializable(with = OffsetDateTimeSerializer::class)
+    val created_at: OffsetDateTime? = null
+)
+
+@OptIn(InternalSerializationApi::class)
+@Serializable
+data class ItemClothingFull(
+    val id: Int? = null,
+    val id_order: Int,
+    val clothing_type: ClothingType,
+    val services: List<Service>,
     val id_client: Int,
     val desc: String,
     val price: Float,
@@ -68,7 +100,9 @@ data class Order(
     val status_payment: Boolean,
     val date_exit: LocalDate,
     @Serializable(with = OffsetDateTimeSerializer::class)
-    val created_at: OffsetDateTime
+    val created_at: OffsetDateTime,
+    @Serializable(with = OffsetDateTimeSerializer::class)
+    val exited_at: OffsetDateTime? = null
 )
 
 @OptIn(InternalSerializationApi::class)

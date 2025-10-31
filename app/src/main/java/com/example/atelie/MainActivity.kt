@@ -1,5 +1,6 @@
 package com.example.atelie
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -45,7 +46,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        loadFragment(NewOrderFragment())
+        lifecycleScope.launch {
+            supabase.auth.signInWith(Email) {
+                email = "acmpassos7@gmail.com"
+                password = "atelie"
+            }
+        }
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
@@ -60,25 +66,24 @@ class MainActivity : AppCompatActivity() {
 
         supabase.handleDeeplinks(intent)
 
-//
-//        @OptIn(InternalSerializationApi::class)
-//        lifecycleScope.launch {
-//            try {
-//                val clientes = supabase
-//                    .from("clients")
-//                    .select()
-//                    .decodeList<Client>()
-//
-//                Log.d("Supabase", clientes.toString())
-//
-//                println(clientes)
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//
-//                Log.d("Supabase", "Não foi meu chapa")
-//            }
-//        }
 
+        @OptIn(InternalSerializationApi::class)
+        lifecycleScope.launch {
+            try {
+                val clientes = supabase
+                    .from("clients")
+                    .select()
+                    .decodeList<Client>()
+
+                Log.d("Supabase", clientes.toString())
+
+                println(clientes)
+            } catch (e: Exception) {
+                e.printStackTrace()
+
+                Log.d("Supabase", "Não foi meu chapa")
+            }
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {

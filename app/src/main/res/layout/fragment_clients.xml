@@ -67,21 +67,14 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20sp">
-                <com.google.android.material.card.MaterialCardView
+
+                <com.example.atelie.views.ContainerCardView
+                    android:id="@+id/card_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="10dp"
                     app:strokeColor="@color/border"
-                    app:strokeWidth="1dp"
-                    android:backgroundTint="@color/white"
-                    android:elevation="0dp">
-                    <LinearLayout
-                        android:id="@+id/client_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                    app:cardCornerRadius="10dp"
+                    app:placeholderText="Nenhum cliente encontrado"/>
 
             </ScrollView>
 

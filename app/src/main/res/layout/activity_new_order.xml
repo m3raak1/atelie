@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/new_order"
+    android:background="@color/bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewOrderActivity">
+
+    <ImageButton
+        android:id="@+id/back_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="@id/subtitle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:padding="20dp"
+        android:src="@drawable/ic_arrow"
+        android:scaleType="fitCenter"
+        android:backgroundTint="@android:color/transparent"
+        android:rotation="180"/>
+    <TextView
+        android:id="@+id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Nova Entrada"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/subtitle"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="@id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adicionar uma nova entrada"
+        android:textColor="@color/dark_gray"/>
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/subtitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp">
+
+            <TextView
+                android:id="@+id/client_label"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="Cliente"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_client"
+                app:layout_constraintTop_toBottomOf="@id/client_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/new_client_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:hintAnimationEnabled="false"
+                app:boxStrokeColor="@color/input_stroke_color"
+                app:boxBackgroundMode="outline"
+                android:layout_marginEnd="8dp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/input_client"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHighlight="@color/primary"
+                    android:padding="15dp"
+                    android:hint="Selecione um cliente"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/new_client_btn"
+                app:layout_constraintStart_toEndOf="@id/input_layout_client"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/input_layout_client"
+                app:layout_constraintBottom_toBottomOf="@id/input_layout_client"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_height="50dp"
+                android:layout_width="0dp"
+                android:src="@drawable/ic_addclient"
+                android:tint="@color/white"
+                android:scaleType="centerInside"
+                android:padding="15dp"
+                android:background="@drawable/md_btn"/>
+
+            <TextView
+                android:id="@+id/position_label"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_client"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="Numero (1 - 140)"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_position"
+                app:layout_constraintTop_toBottomOf="@id/position_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:hintAnimationEnabled="false"
+                app:boxStrokeColor="@color/input_stroke_color"
+                app:boxBackgroundMode="outline"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHighlight="@color/primary"
+                    android:hint="Numero"
+                    android:inputType="numberSigned"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/data_entry_label"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_position"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="Data de Entrega"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_data_entry"
+                app:layout_constraintTop_toBottomOf="@id/data_entry_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/input_layout_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:hintAnimationEnabled="false"
+                app:boxStrokeColor="@color/input_stroke_color"
+                app:boxBackgroundMode="outline"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_data_entry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHighlight="@color/primary"
+                    android:hint="dd/mm/aaaa"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:inputType="date"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/time_label"
+                app:layout_constraintTop_toTopOf="@id/data_entry_label"
+                app:layout_constraintStart_toStartOf="@id/input_layout_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="Periodo"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_time"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                app:layout_constraintTop_toBottomOf="@id/time_label"
+                app:layout_constraintStart_toEndOf="@id/input_layout_data_entry"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:hintAnimationEnabled="false"
+                app:boxStrokeColor="@color/input_stroke_color"
+                app:boxBackgroundMode="outline"
+                app:hintEnabled="false">
+
+                <AutoCompleteTextView
+                    android:id="@+id/input_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:hint="Manha"
+                    app:simpleItems="@array/time_items"
+                    android:backgroundTint="@color/white"
+                    android:popupBackground="@color/white"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/payment"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_data_entry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pagamento Efetuado"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_item_clothe"
+                app:layout_constraintTop_toBottomOf="@id/payment"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cornerRadius="10dp"
+                android:backgroundTint="@color/primary_light"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border"
+                android:text="Adicionar Peça"
+                android:textColor="@color/white"
+                app:icon="@drawable/ic_plus_draw"
+                app:iconSize="0dp"
+                app:iconTint="@color/white"/>
+
+            <TextView
+                app:layout_constraintTop_toTopOf="@id/add_item_clothe"
+                app:layout_constraintBottom_toBottomOf="@id/add_item_clothe"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peças"
+                android:textStyle="bold"/>
+
+            <com.example.atelie.views.ContainerCardView
+                android:id="@+id/card_container"
+                app:layout_constraintTop_toBottomOf="@id/add_item_clothe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                app:placeholderText="Nenhuma peça adicionada"
+                app:strokeColor="@color/border"/>
+
+            <TextView
+                android:id="@+id/item_clothe_error"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/card_container"
+                app:layout_constraintStart_toStartOf="@id/card_container"
+                android:text="Adicione pelo menos uma peça"
+                android:textColor="@color/design_default_color_error"
+                />
+
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/total_price"
+                app:layout_constraintTop_toBottomOf="@id/card_container"
+                app:layout_constraintEnd_toEndOf="@id/card_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total: "
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/observation_label"
+                app:layout_constraintTop_toBottomOf="@id/total_price"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="Observações (Opicional)"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_observation"
+                app:layout_constraintTop_toBottomOf="@id/observation_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:hintAnimationEnabled="false"
+                app:boxStrokeColor="@color/input_stroke_color"
+                app:boxBackgroundMode="outline"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_observation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHighlight="@color/primary"
+                    android:paddingVertical="15dp"
+                    android:hint="Observações adicionaris osbre este pedido"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/save_client"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="15dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/primary_light"
+                android:text="Enviar Entrada"
+                android:textStyle="bold"
+                app:cornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_observation" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

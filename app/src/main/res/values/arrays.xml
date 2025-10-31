@@ -3,6 +3,13 @@
     <string-array name="time_items">
         <item>Manhã</item>
         <item>Tarde</item>
-        <item>Noite</item>
+    </string-array>
+    <string-array name="status_items">
+        <item>Não Saiu</item>
+        <item>Saiu</item>
+    </string-array>
+    <string-array name="status_payment">
+        <item>Pago</item>
+        <item>Não pago</item>
     </string-array>
 </resources>

@@ -64,23 +64,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp">
-            <com.google.android.material.card.MaterialCardView
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="20dp">
+            <com.example.atelie.views.ContainerCardView
+                android:id="@+id/card_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                app:cardCornerRadius="10dp"
                 app:strokeColor="@color/border"
-                app:strokeWidth="1dp"
-                android:backgroundTint="@color/white"
-                android:elevation="0dp">
-                <LinearLayout
-                    android:id="@+id/order_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                app:cardCornerRadius="10dp"
+                app:placeholderText="Nenhuma entrada encontrada"/>
         </ScrollView>
         <ImageButton
             android:id="@+id/add_order"
